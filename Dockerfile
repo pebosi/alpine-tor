@@ -1,4 +1,4 @@
-FROM alpine:latet
+FROM alpine:latest
 
 RUN apk add tor --no-cache --allow-untrusted haproxy ruby privoxy
 
