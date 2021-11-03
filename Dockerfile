@@ -4,7 +4,7 @@ RUN apk add tor --no-cache --allow-untrusted haproxy ruby privoxy
 
 RUN apk --update add --virtual build-dependencies ruby-bundler ruby-dev  \
   && apk add ruby-nokogiri \
-  && gem install --no-ri --no-rdoc socksify \
+  && gem install --no-rdoc socksify \
   && apk del build-dependencies \
   && rm -rf /var/cache/apk/*
 
