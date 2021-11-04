@@ -40,7 +40,9 @@ module Service
     end
 
     def executable
-      self.class.which(service_name.downcase)
+      $logger.info "exec #{service_name}"
+
+      self.class.which(service_name)
     end
 
     def stop
