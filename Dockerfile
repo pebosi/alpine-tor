@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN apk add tor --no-cache --allow-untrusted haproxy ruby privoxy
 
 RUN apk --update add --virtual build-dependencies ruby-bundler ruby-dev  \
-  && apk add ruby-nokogiri \
+  && apk add ruby-nokogiri which \
   && gem install -N socksify \
   && apk del build-dependencies \
   && rm -rf /var/cache/apk/*
