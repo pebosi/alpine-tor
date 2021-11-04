@@ -14,6 +14,8 @@ module Service
     end
 
     def service_name
+      $logger.info "init #{service_name}"
+
       self.class.name.downcase.split('::').last
     end
 
@@ -72,6 +74,8 @@ module Service
     end
 
     def self.which(executable)
+      $logger.debug "exec: #{executable}"
+
       path = `which #{executable}`.strip
       if path == ""
         return nil
