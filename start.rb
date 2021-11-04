@@ -40,7 +40,7 @@ module Service
     end
 
     def executable
-      self.class.which(service_name)
+      self.class.which(service_name.downcase)
     end
 
     def stop
