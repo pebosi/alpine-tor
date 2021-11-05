@@ -1,6 +1,9 @@
 FROM alpine:edge
 
-RUN apk add --no-cache tor haproxy ruby privoxy
+RUN apk add --no-cache \
+  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+  --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+  tor haproxy ruby privoxy
 
 RUN apk --update add --virtual build-dependencies ruby-bundler ruby-dev  \
   && apk add ruby-nokogiri which \
