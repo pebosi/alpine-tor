@@ -14,8 +14,6 @@ module Service
     end
 
     def service_name
-      $logger.info "init #{service_name}"
-
       self.class.name.downcase.split('::').last
     end
 
@@ -40,8 +38,6 @@ module Service
     end
 
     def executable
-      $logger.info "exec #{service_name}"
-
       self.class.which(service_name)
     end
 
