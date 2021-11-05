@@ -1,13 +1,12 @@
-FROM alpine:latest
+FROM alpine:edge
 
-RUN apk add tor --no-cache --allow-untrusted haproxy ruby privoxy
+RUN apk add --no-cache tor haproxy ruby privoxy
 
 RUN apk --update add --virtual build-dependencies ruby-bundler ruby-dev  \
   && apk add ruby-nokogiri which \
   && gem install -N socksify \
   && apk del build-dependencies \
   && rm -rf /var/cache/apk/*
-
 
 ADD haproxy.cfg.erb /usr/local/etc/haproxy.cfg.erb
 ADD privoxy.cfg.erb /usr/local/etc/privoxy.cfg.erb
