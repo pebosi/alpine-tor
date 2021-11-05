@@ -5,7 +5,7 @@ RUN apk add --no-cache \
   --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
   tor haproxy ruby privoxy
 
-RUN apk --update add --virtual build-dependencies ruby-bundler ruby-dev  \
+RUN apk --update add --virtual build-dependencies g++ ruby-bigdecimal ruby-etc ruby-bundler ruby-dev  \
   && apk add ruby-nokogiri which \
   && gem install -N socksify \
   && apk del build-dependencies \
