@@ -74,7 +74,7 @@ module Service
     def self.which(executable)
       $logger.debug "exec: #{executable}"
 
-      path = `which #{executable}`.strip
+      path = `/usr/bin/which #{executable}`.strip
       if path == ""
         return nil
       else
