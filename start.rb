@@ -37,10 +37,6 @@ module Service
       "/var/run/#{service_name}/#{port}.pid"
     end
 
-    def executable
-      self.class.which(service_name)
-    end
-
     def stop
       $logger.info "stopping #{service_name} on port #{port}"
       if File.exists?(pid_file)
@@ -70,17 +66,6 @@ module Service
         Process.detach(pid)
       end
     end
-
-    def self.which(executable)
-      $logger.debug "exec: #{executable}"
-
-      path = `/usr/bin/which #{executable}`.strip
-      if path == ""
-        return nil
-      else
-        return path
-      end
-    end
   end
 
 
@@ -102,7 +87,7 @@ module Service
 
     def start
       super
-      self.class.fire_and_forget(executable,
+      self.class.fire_and_forget("/usr/bin/tor",
                                  "--SocksPort #{port}",
                                  "--NewCircuitPeriod #{new_circuit_period}",
                                  "--MaxCircuitDirtiness #{max_circuit_dirtiness}",
@@ -183,13 +168,13 @@ module Service
     def start
       super
       compile_config
-      self.class.fire_and_forget(executable,
+      self.class.fire_and_forget("/usr/sbin/haproxy",
                                  "-f #{@config_path}",
                                  "| logger 2>&1")
     end
 
     def soft_reload
-      self.class.fire_and_forget(executable,
+      self.class.fire_and_forget("/usr/sbin/haproxy",
                                  "-f #{@config_path}",
                                  "-p #{pid_file}",
                                  "-sf #{File.read(pid_file)}",
@@ -223,7 +208,7 @@ module Service
     def start
       super
       compile_config
-      self.class.fire_and_forget(executable, "--no-daemon", "#{@config_path}", "| logger 2>&1")
+      self.class.fire_and_forget("/usr/sbin/privoxy", "--no-daemon", "#{@config_path}", "| logger 2>&1")
     end
 
     private
