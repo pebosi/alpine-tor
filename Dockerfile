@@ -6,7 +6,7 @@ RUN apk add --no-cache \
   tor haproxy ruby privoxy
 
 RUN apk --update add --virtual build-dependencies g++ ruby-bigdecimal ruby-etc ruby-bundler ruby-dev  \
-  && apk add ruby-nokogiri which \
+  && apk add --no-cache ruby-nokogiri which \
   && gem install -N socksify \
   && apk del build-dependencies \
   && rm -rf /var/cache/apk/*
