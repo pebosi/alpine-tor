@@ -25,7 +25,7 @@ module Service
     def ensure_directories
       %w{lib run log}.each do |dir|
         path = "/var/#{dir}/#{service_name}"
-        Dir.mkdir(path) unless Dir.exists?(path)
+        Dir.mkdir(path) unless Dir.exist?(path)
       end
     end
 
@@ -39,7 +39,7 @@ module Service
 
     def stop
       $logger.info "stopping #{service_name} on port #{port}"
-      if File.exists?(pid_file)
+      if File.exist?(pid_file)
         pid = File.read(pid_file).strip
         begin
           self.class.kill(pid.to_i)
