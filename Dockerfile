@@ -19,4 +19,4 @@ RUN chmod +x /usr/local/bin/start.rb
 
 EXPOSE 2090 8118 5566
 
-CMD ruby /usr/local/bin/start.rb
+CMD ["ruby", "/usr/local/bin/start.rb"]
